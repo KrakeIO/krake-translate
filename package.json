@@ -1,0 +1,20 @@
+{
+    "author": "Gary Teh <garyjob@gmail.com>",
+    "name": "krake-slave"
+  , "main": "./krake_slave_server.coffee"
+  , "version": "0.0.7"
+  , "private": true
+  , "engines": {
+    "node": "=0.6.11"
+  }  
+  , "dependencies": {
+      "express": "2.5.7"
+    , "geocoder": ""
+    , "request": ""
+    , "q": ""
+    , "js2xmlparser": ""
+  }
+  , "devDependencies": {
+      "express": "2.5.7"
+  }    
+}
