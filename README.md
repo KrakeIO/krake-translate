@@ -5,7 +5,7 @@ A simple web service that takes a HTTP POST request and translates the correspon
 end point
 
 <h2>Making a request</h2>
-<pre>
+```json
   URL: /json_object_to_html
   METHOD: POST
 
@@ -13,10 +13,10 @@ end point
     origin_url: "http://localhost/json_response",
     method: "post"
   }
-</pre>
+```
 
 <h2>Actual response from data source</h2>
-<pre>
+```json
   HTTP RESPONSE STATUS: 200
   content-type: application/json
 
@@ -27,7 +27,7 @@ end point
     },
     attribute_2: "This is another value"
   }
-</pre>
+```
 
 <h2>Response</h2>
 <h4>When successfuly</h4>
