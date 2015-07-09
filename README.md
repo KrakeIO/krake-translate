@@ -79,19 +79,6 @@ end point
 ```html
   HTTP RESPONSE STATUS: 200
 
-  <html>
-    <body>
-      <div id="attribute_1">
-        <div id="sub_attribute_1">
-          This is the first value in the JSON object
-        </div>
-        <div id="sub_attribute_2">
-          This is the second value in the second object
-        </div>      
-      </div>
-      <div id="attribute_2">
-        This is another value
-      </div>
-    </body>
-  </html>
+  <div>This is some cool stuff</div>
+  <div>I really like it</div>
 ```
