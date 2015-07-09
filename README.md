@@ -31,7 +31,7 @@ end point
 
 <h2>Response</h2>
 <h4>When successfuly</h4>
-<pre>
+```html
   HTTP RESPONSE STATUS: 200
 
   <html>
@@ -49,5 +49,5 @@ end point
       </div>
     </body>
   </html>
-</pre>
+```
 
