@@ -8,6 +8,7 @@ app = express.createServer()
 
 app.configure ()->
   app.use express.bodyParser()
+  app.use express.cookieParser()  
   app.use(app.router)
 
 app.get '/', (req, res)->
@@ -37,6 +38,8 @@ app.post '/json_attribute_raw', (req, res)->
   attribute = req.body.attribute
 
   console.log "[SERVER_TRANSLATE] #{new Date()} : /json_attribute_raw \n\torigin_url: #{origin_url}\n\tmethod: #{method}\n\tattribute: #{attribute}"  
+  console.log "These are the cookies"
+  console.log req.cookies
 
   switch method
     when "get"
