@@ -11,6 +11,7 @@
       "express": "2.5.7"
     , "geocoder": ""
     , "request": ""
+    , "kson" : "https://github.com/KrakeIO/kson/tarball/master"    
     , "q": ""
     , "js2xmlparser": ""
   }
