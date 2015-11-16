@@ -68,6 +68,9 @@ app.post '/json_attribute_raw', (req, res)->
   switch method
     when "get"
       request options, (error, response, body)=>
+        console.log "\n==== Start Response Body==="
+        console.log body
+        console.log "\n\n==== End Response Body==="
         if !error && response.statusCode == 200
           output = JSON.parse(body)[attribute]
           res.send output
