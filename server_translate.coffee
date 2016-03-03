@@ -25,6 +25,23 @@ app.configure ()->
 app.get '/', (req, res)->
   res.send "Krake translators for custom URLS"
 
+app.post '/raw_html', (req, res)->
+  method = req.body.method || "get"
+  origin_url = req.body.origin_url
+  cookies_to_forward = req.body.post_cookies || "[]"
+  cookie_string = getCookieString cookies_to_forward
+  options = 
+    url: origin_url
+    headers: 
+      Cookie: cookie_string
+  switch method
+    when "get"
+      request options, (error, response, body)=>
+        if !error && response.statusCode == 200
+          res.send body
+        else
+          res.send error
+
 app.post '/json_object_to_html', (req, res)->
   method = req.body.method || "get"
   origin_url = req.body.origin_url
