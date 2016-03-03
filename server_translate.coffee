@@ -16,10 +16,10 @@ getCookieString = ( cookies )->
 
 replaceURLs = (body, origin_url)->
   body
-    .replace(/href='\//g, "href='" + origin_url + "/")
-    .replace(/href="\//g, 'href="' + origin_url + '/')
-    .replace(/src="\//g, 'src="' + origin_url + '/')
-    .replace(/src="\//g, 'src="' + origin_url + '/')
+    .replace(/href='\//g, "href='//" + origin_url + "/")
+    .replace(/href="\//g, 'href="//' + origin_url + '/')
+    .replace(/src="\//g, 'src="//' + origin_url + '/')
+    .replace(/src="\//g, 'src="//' + origin_url + '/')
   
 
 app = express.createServer()
@@ -44,8 +44,10 @@ app.post '/raw_html', (req, res)->
   switch method
     when "get"
       request options, (error, response, body)=>
+        console.log response.req._headers.host
         if !error && response.statusCode == 200
-          body = replaceURLs body, origin_url
+          body = replaceURLs body, response.req._headers.host
+          console.log body
           res.send body
         else
           res.send error
