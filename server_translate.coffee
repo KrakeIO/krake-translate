@@ -21,8 +21,8 @@ replaceURLs = (body, origin_url)->
     .replace(/src="\//g, 'src="//' + origin_url + '/')
     .replace(/src="\//g, 'src="//' + origin_url + '/')
     .replace(/href='\//g, "href='//" + origin_url + "/")
-    .replace(/<script>/g, '<scr!pt>')
-    .replace(/<\/script>/g, '<\/scr!pt>')
+    .replace(/<script/g, '<!--script>')
+    .replace(/<\/script>/g, '<\/script-->')
   
 
 app = express.createServer()
