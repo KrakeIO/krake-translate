@@ -13,6 +13,13 @@ getCookieString = ( cookies )->
 
   cookie_string = translated_cookies.join "; "
   cookie_string
+
+replaceURLs = (body, origin_url)->
+  body
+    .replace(/href='\//g, "href='" + origin_url + "/")
+    .replace(/href="\//g, 'href="' + origin_url + '/')
+    .replace(/src="\//g, 'src="' + origin_url + '/')
+    .replace(/src="\//g, 'src="' + origin_url + '/')
   
 
 app = express.createServer()
@@ -38,6 +45,7 @@ app.post '/raw_html', (req, res)->
     when "get"
       request options, (error, response, body)=>
         if !error && response.statusCode == 200
+          body = replaceURLs body, origin_url
           res.send body
         else
           res.send error
