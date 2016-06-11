@@ -4,6 +4,9 @@ request = require 'request'
 fs = require 'fs'
 js2xmlparser = require("js2xmlparser")
 
+# Output the PID to the server.pid file
+fs.writeFile "./temp/server.pid", process.pid
+
 getCookieString = ( cookies )->
   console.log("processing cookies")
   parsed_cookies = JSON.parse cookies
@@ -104,6 +107,8 @@ app.post '/json_attribute_raw', (req, res)->
           res.send output
         else
           res.send error
+
+
   
 exports = module.exports = app
 
