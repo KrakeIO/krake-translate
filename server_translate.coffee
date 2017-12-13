@@ -66,8 +66,9 @@ app.post '/json_object_to_html', (req, res)->
     url: origin_url
     headers: 
       Cookie: cookie_string
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
 
-  console.log "Processing URL: #{origin_url}"  
+  console.log "[SERVER_TRANSLATE] #{new Date()} : /json_object_to_html \n\torigin_url: #{origin_url}"  
   switch method
     when "get"
       request options, (error, response, body)=>
@@ -94,6 +95,7 @@ app.post '/json_attribute_raw', (req, res)->
     url: origin_url
     headers: 
       Cookie: cookie_string
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
 
   console.log "[SERVER_TRANSLATE] #{new Date()} : /json_attribute_raw \n\torigin_url: #{origin_url}\n\tmethod: #{method}\n\tattribute: #{attribute}"
 
