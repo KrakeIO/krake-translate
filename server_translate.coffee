@@ -73,7 +73,11 @@ app.post '/json_object_to_html', (req, res)->
     when "get"
       request options, (error, response, body)=>
         if !error && response.statusCode == 200
-          res.send js2xmlparser("data", body)
+          try
+            res.send js2xmlparser("data", body)
+          catch error
+            console.log "\tERROR: Parsing error occurred"
+            res.send body
         else
           res.send error
 
@@ -109,7 +113,7 @@ app.post '/json_attribute_raw', (req, res)->
             res.send output
           catch error
             console.log "\tERROR: Parsing error occurred"
-            res.send "<html><body></body></html>"
+            res.send body
         else
           res.send error
 
