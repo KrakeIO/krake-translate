@@ -3,6 +3,8 @@ express = require 'express'
 request = require 'request'
 fs = require 'fs'
 js2xmlparser = require("js2xmlparser")
+bugsnag = require("bugsnag")
+bugsnag.register("c1e02e5a4da50736e2e981becb437b5f")
 
 # Output the PID to the server.pid file
 fs.writeFile "./temp/server.pid", process.pid
@@ -29,9 +31,11 @@ replaceURLs = (body, origin_url)->
 app = express.createServer()
 
 app.configure ()->
+  app.use bugsnag.requestHandler
   app.use express.bodyParser()
   app.use express.cookieParser()
-  app.use(app.router)
+  app.use app.router
+  app.use bugsnag.errorHandler
 
 app.get '/', (req, res)->
   res.send "Krake translators for custom URLS"
@@ -73,7 +77,19 @@ app.post '/json_object_to_html', (req, res)->
     when "get"
       request options, (error, response, body)=>
         if !error && response.statusCode == 200
-          res.send js2xmlparser("data", body)
+          try
+            res.send js2xmlparser("data", body)
+          catch error
+            console.log error
+            bugsnag.notify( error, {
+              subsystem: {
+                route: "/json_object_to_html",
+                origin_url: origin_url,
+                response: body
+              }
+            })
+            console.log "\tERROR: Parsing error occurred"
+            res.send "<html><body></body></html>"
         else
           res.send error
 
@@ -108,6 +124,13 @@ app.post '/json_attribute_raw', (req, res)->
             console.log "\tSUCCESS: results returned"
             res.send output
           catch error
+            bugsnag.notify( error, {
+              subsystem: {
+                route: "/json_object_to_html",
+                origin_url: origin_url,
+                response: body
+              }
+            })
             console.log "\tERROR: Parsing error occurred"
             res.send "<html><body></body></html>"
         else
