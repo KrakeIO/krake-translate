@@ -132,7 +132,7 @@ app.post '/json_attribute_raw', (req, res)->
               }
             })
             console.log "\tERROR: Parsing error occurred"
-            res.send "<html><body></body></html>"
+            res.send body
         else
           res.send error
 
